@@ -10,6 +10,8 @@ import {
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../app/slices/userSlice";
 
 const Home: NextPage = () => {
   const {
@@ -17,6 +19,8 @@ const Home: NextPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const dispatch = useDispatch();
 
   return (
     <Container>
@@ -38,6 +42,7 @@ const Home: NextPage = () => {
           <form
             onSubmit={handleSubmit((data) => {
               console.log(data);
+              dispatch(authenticate(data));
             })}
           >
             <Stack marginTop={10} spacing={3}>
