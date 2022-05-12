@@ -12,6 +12,7 @@ import type { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../app/slices/userSlice";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const {
@@ -21,6 +22,8 @@ const Home: NextPage = () => {
   } = useForm();
 
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   return (
     <Container>
@@ -43,6 +46,7 @@ const Home: NextPage = () => {
             onSubmit={handleSubmit((data) => {
               console.log(data);
               dispatch(authenticate(data));
+              router.push("/timer");
             })}
           >
             <Stack marginTop={10} spacing={3}>
